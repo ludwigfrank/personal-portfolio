@@ -28,51 +28,6 @@ export default function Home() {
             />
           </div>
         </section>
-        {/* <section className='w-full flex justify-center'>
-          <div className='w-[960px] fixed'>
-            <div
-              className='container'
-              style={{
-                perspective: '1000px',
-                // make more round
-                borderRadius: '50%',
-                //fixed position
-                left: '0',
-                marginLeft: '0px',
-                scale: '0.5',
-                // move 20px to the left
-                transform: 'translateX(-64px)',
-                // filter
-                filter: 'drop-shadow(0 32px 24px rgba(0,0,0,0.1))',
-              }}
-            >
-              <div className='coin pound'>
-                <div className='face front'></div>
-                <div className='face back'></div>
-                <figure className='side'></figure>
-                <figure className='side'></figure>
-                <figure className='side'></figure>
-                <figure className='side'></figure>
-                <figure className='side'></figure>
-                <figure className='side'></figure>
-                <figure className='side'></figure>
-                <figure className='side'></figure>
-                <figure className='side'></figure>
-                <figure className='side'></figure>
-                <figure className='side'></figure>
-                <figure className='side'></figure>
-                <figure className='side'></figure>
-                <figure className='side'></figure>
-                <figure className='side'></figure>
-                <figure className='side'></figure>
-                <figure className='side'></figure>
-                <figure className='side'></figure>
-                <figure className='side'></figure>
-                <figure className='side'></figure>
-              </div>
-            </div>
-          </div>
-        </section> */}
         <section className='w-full mt-40'>
           <div className='max-w-[960] m-auto mt-24 mb-8 flex flex-col relative'>
             <div className='mb-6'>
