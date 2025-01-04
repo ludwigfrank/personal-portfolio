@@ -1,100 +1,193 @@
-import Image from "next/image";
+// Import global css
+import Image from 'next/image';
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+    <div className='font-[family-name:var(--font-geist-sans)]'>
+      <main className='font-[system-ui]'>
+        {/* Create two images placed absolute and fixed at the top left and right */}
+        <section>
+          <div className='absolute top-0 right-0'>
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src='/img/vines-left.png'
+              className='transform scale-x-[-1]'
+              width={800}
+              height={500}
+              alt='1'
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+          </div>
+
+          <div className='absolute top-0 left-0'>
+            <Image
+              src='/img/vines-right.png'
+              width={800}
+              height={500}
+              // scale 0.8 in y axis move 20px to the top
+              className='transform scale-x-[-1] scale-y-[0.9] translate-y-[-20px]'
+              alt='1'
+            />
+          </div>
+        </section>
+        {/* <section className='w-full flex justify-center'>
+          <div className='w-[960px] fixed'>
+            <div
+              className='container'
+              style={{
+                perspective: '1000px',
+                // make more round
+                borderRadius: '50%',
+                //fixed position
+                left: '0',
+                marginLeft: '0px',
+                scale: '0.5',
+                // move 20px to the left
+                transform: 'translateX(-64px)',
+                // filter
+                filter: 'drop-shadow(0 32px 24px rgba(0,0,0,0.1))',
+              }}
+            >
+              <div className='coin pound'>
+                <div className='face front'></div>
+                <div className='face back'></div>
+                <figure className='side'></figure>
+                <figure className='side'></figure>
+                <figure className='side'></figure>
+                <figure className='side'></figure>
+                <figure className='side'></figure>
+                <figure className='side'></figure>
+                <figure className='side'></figure>
+                <figure className='side'></figure>
+                <figure className='side'></figure>
+                <figure className='side'></figure>
+                <figure className='side'></figure>
+                <figure className='side'></figure>
+                <figure className='side'></figure>
+                <figure className='side'></figure>
+                <figure className='side'></figure>
+                <figure className='side'></figure>
+                <figure className='side'></figure>
+                <figure className='side'></figure>
+                <figure className='side'></figure>
+                <figure className='side'></figure>
+              </div>
+            </div>
+          </div>
+        </section> */}
+        <section className='w-full mt-40'>
+          <div className='max-w-[960] m-auto mt-24 mb-8 flex flex-col relative'>
+            <div className='mb-6'>
+              <Image
+                src='/img/avatar.png'
+                alt='Ludwig Frank'
+                width={56}
+                height={56}
+                className='rounded-full'
+              />
+            </div>
+
+            {/* <div className='mb-12'>
+              <p
+                className='text-6xl tracking-tight leading-[60px] mb-6'
+                style={{ fontFamily: 'Founders Grotesk' }}
+              >
+                Lead with curiosity, shape with clarity — design{' '}
+                <span
+                  style={{
+                    // make italic
+                    fontStyle: 'italic',
+
+                    fontFamily: 'Signifier',
+                  }}
+                >
+                  simple
+                </span>
+                , and{' '}
+                <span
+                  style={{
+                    // make italic
+                    fontStyle: 'italic',
+                    fontFamily: 'Signifier',
+                  }}
+                >
+                  impossible to ignore.
+                </span>
+              </p>
+              <p
+                className='text-2xl max-w-[640] leading-8'
+                style={{
+                  // make italic
+                  fontFamily: 'Signifier',
+                }}
+              >
+                Ludwig Frank is a designer and creative technologist. Currently
+                he is leading CX Design for Hopper and HTS. He shaped the
+                products at Hopper, HTS, Commbank, Uber, Moonfare, Tripadvisor
+                and many more.
+              </p>
+            </div> */}
+
+            <div className='mb-12'>
+              <p className='text-6xl tracking-tight font-medium leading-[64px] mb-8'>
+                Lead with curiosity, shape with clarity — products that are{' '}
+                <span
+                  style={{
+                    // make italic
+
+                    fontFamily: 'Signifier',
+                    fontSize: '112%',
+                    //italic
+                    fontWeight: 400,
+                  }}
+                >
+                  simple
+                </span>
+                , yet{' '}
+                <span
+                  style={{
+                    // make italic
+
+                    fontFamily: 'Signifier',
+                    fontSize: '112%',
+                    //italic
+                    fontWeight: 400,
+                  }}
+                >
+                  impossible to ignore.
+                </span>
+              </p>
+              <p
+                className='text-2xl tracking-tight max-w-[640] leading-9'
+                style={{
+                  // make italic
+                  fontFamily: 'Signifier',
+                }}
+              >
+                Ludwig Frank is a designer and creative technologist. He is
+                leading CX Design for Hopper/HTS and is the founder of the
+                creative agency Fine Supply. Ludwig shaped the products at
+                Commbank, HSBC, Uber, Tripadvisor, Moonfare and many more.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className='w-full '>
+          <div className='max-w-[960] m-auto relative flex items-center gap-4'>
+            <a
+              href='#'
+              className='inline-block px-6 py-3 bg-[#2726E9] text-white rounded-full w-auto font-medium shadow-xl'
+            >
+              Book a call
+            </a>
+
+            <p className='text-sm text-neutral-600'>
+              Discuss your project or mentorship.
+            </p>
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      <footer className='row-start-3 flex gap-6 flex-wrap items-center justify-center'>
+        TBD
       </footer>
     </div>
   );
