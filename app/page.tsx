@@ -1,4 +1,5 @@
 // Import global css
+import CarouselDemo from '@/components/infinite-carousel';
 import Image from 'next/image';
 
 export default function Home() {
@@ -26,8 +27,9 @@ export default function Home() {
             />
           </div>
         </section>
+
         <section className='w-full mt-40'>
-          <div className='max-w-[960] m-auto mt-24 mb-8 flex flex-col relative'>
+          <div className='max-w-[960] m-auto mb-8 flex flex-col relative'>
             <div className='mb-6'>
               <Image
                 src='/img/avatar.png'
@@ -38,8 +40,8 @@ export default function Home() {
               />
             </div>
 
-            <div className='mb-12'>
-              <p className='text-6xl tracking-tight font-medium leading-[64px] mb-8'>
+            <div className='mb-8'>
+              <p className='text-5xl tracking-tight font-medium leading-[56px] mb-8'>
                 Lead with curiosity, shape with clarity — products that are{' '}
                 <span
                   style={{
@@ -62,7 +64,7 @@ export default function Home() {
                 </span>
               </p>
               <p
-                className='text-2xl tracking-tight max-w-[640] leading-9'
+                className='text-xl tracking-tight max-w-[720] leading-8'
                 style={{
                   fontFamily: 'Signifier',
                 }}
@@ -77,18 +79,32 @@ export default function Home() {
         </section>
 
         <section className='w-full '>
-          <div className='max-w-[960] m-auto relative flex items-center gap-4'>
-            <a
-              href='#'
-              className='inline-block px-6 py-3 bg-[#2726E9] text-white rounded-full w-auto font-medium shadow-xl'
-            >
-              Book a call
-            </a>
+          <div className='max-w-[960] m-auto relative flex items-center justify-between gap-4'>
+            <div className='flex gap-2'>
+              <a
+                href='#'
+                className='inline-block px-6 py-3 bg-[#2726E9] text-white rounded-full w-auto font-medium shadow-xl hover:bg-[#1F1DCA] hover:shadow-3xl'
+              >
+                Book a call
+              </a>
 
-            <p className='text-sm text-neutral-600'>
-              Discuss your project or mentorship.
-            </p>
+              <a
+                href='#'
+                className='inline-block px-6 py-3 box-border border transition-colors text-neutral-600 rounded-full w-auto font-medium hover:bg-neutral-100 hover:text-neutral-900'
+              >
+                Contact via email
+              </a>
+            </div>
+
+            <div>
+              <p className='text-sm text-neutral-600 text-right'>Based</p>
+              <p className='text-sm text-neutral-600'>Singapore, 10:23 AM</p>
+            </div>
           </div>
+        </section>
+
+        <section>
+          <CarouselDemo />
         </section>
       </main>
       <footer className='row-start-3 flex gap-6 flex-wrap items-center justify-center'>
