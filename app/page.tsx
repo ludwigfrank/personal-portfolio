@@ -5,7 +5,6 @@ export default function Home() {
   return (
     <div className='font-[family-name:var(--font-geist-sans)]'>
       <main className='font-[system-ui]'>
-        {/* Create two images placed absolute and fixed at the top left and right */}
         <section>
           <div className='absolute top-0 right-0'>
             <Image
@@ -22,7 +21,6 @@ export default function Home() {
               src='/img/vines-right.png'
               width={800}
               height={500}
-              // scale 0.8 in y axis move 20px to the top
               className='transform scale-x-[-1] scale-y-[0.9] translate-y-[-20px]'
               alt='1'
             />
@@ -40,57 +38,13 @@ export default function Home() {
               />
             </div>
 
-            {/* <div className='mb-12'>
-              <p
-                className='text-6xl tracking-tight leading-[60px] mb-6'
-                style={{ fontFamily: 'Founders Grotesk' }}
-              >
-                Lead with curiosity, shape with clarity — design{' '}
-                <span
-                  style={{
-                    // make italic
-                    fontStyle: 'italic',
-
-                    fontFamily: 'Signifier',
-                  }}
-                >
-                  simple
-                </span>
-                , and{' '}
-                <span
-                  style={{
-                    // make italic
-                    fontStyle: 'italic',
-                    fontFamily: 'Signifier',
-                  }}
-                >
-                  impossible to ignore.
-                </span>
-              </p>
-              <p
-                className='text-2xl max-w-[640] leading-8'
-                style={{
-                  // make italic
-                  fontFamily: 'Signifier',
-                }}
-              >
-                Ludwig Frank is a designer and creative technologist. Currently
-                he is leading CX Design for Hopper and HTS. He shaped the
-                products at Hopper, HTS, Commbank, Uber, Moonfare, Tripadvisor
-                and many more.
-              </p>
-            </div> */}
-
             <div className='mb-12'>
               <p className='text-6xl tracking-tight font-medium leading-[64px] mb-8'>
                 Lead with curiosity, shape with clarity — products that are{' '}
                 <span
                   style={{
-                    // make italic
-
                     fontFamily: 'Signifier',
                     fontSize: '112%',
-                    //italic
                     fontWeight: 400,
                   }}
                 >
@@ -99,11 +53,8 @@ export default function Home() {
                 , yet{' '}
                 <span
                   style={{
-                    // make italic
-
                     fontFamily: 'Signifier',
                     fontSize: '112%',
-                    //italic
                     fontWeight: 400,
                   }}
                 >
@@ -113,7 +64,6 @@ export default function Home() {
               <p
                 className='text-2xl tracking-tight max-w-[640] leading-9'
                 style={{
-                  // make italic
                   fontFamily: 'Signifier',
                 }}
               >
