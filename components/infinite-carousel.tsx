@@ -1,10 +1,13 @@
 'use client';
+import BackgroundVideo from 'next-video/background-video';
+import videoFlooz from '@/videos/flooz-marketing-website-new.mp4.json';
 
 import React, { useEffect, useRef, useState } from 'react';
 
 interface CarouselItem {
   id: string | number;
-  src: string;
+  type?: 'image' | 'video';
+  src: string | object;
   alt: string;
   width: number;
   height: number;
@@ -134,17 +137,31 @@ const InfiniteCarousel = ({
             }}
             className='flex-none'
           >
-            <img
-              src={item.src || '/api/placeholder/400/300'}
-              alt={item.alt || `Carousel item ${index + 1}`}
-              style={{
-                width: item.width,
-                height: item.height,
-                borderRadius,
-                objectFit,
-                border: '1px solid #ddd',
-              }}
-            />
+            {item.type === 'video' ? (
+              <div
+                className='border overflow-hidden rounded-lg'
+                style={{
+                  width: item.width,
+                  height: item.height,
+                  borderRadius,
+                  objectFit,
+                  overflow: 'hidden',
+                }}
+              >
+                <BackgroundVideo src={item.src as string} />
+              </div>
+            ) : (
+              <img
+                src={item.src as string}
+                alt={item.alt}
+                style={{
+                  width: item.width,
+                  height: item.height,
+                  borderRadius,
+                  objectFit,
+                }}
+              />
+            )}
           </div>
         ))}
       </div>
@@ -177,18 +194,26 @@ const CarouselDemo = () => {
       height: 1197 / 2.8,
     },
     {
-      id: 2,
+      id: 4,
       src: '/img/work/flooz-accept-message.png',
       alt: 'Sample 2',
       width: 750 / 3,
       height: 1652 / 3,
     },
     {
-      id: 2,
+      id: 5,
       src: '/img/work/flooz-event-details.png',
       alt: 'Sample 2',
       width: 750 / 3,
       height: 1652 / 3,
+    },
+    {
+      id: 6,
+      type: 'video' as const,
+      src: videoFlooz,
+      alt: 'Flooz video',
+      width: 1000,
+      height: 666,
     },
   ];
 
