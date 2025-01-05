@@ -1,8 +1,12 @@
 'use client';
-import BackgroundVideo from 'next-video/background-video';
-import videoFlooz from '@/videos/flooz-marketing-website-new.mp4.json';
-
 import React, { useEffect, useRef, useState } from 'react';
+import videoFlooz from '@/videos/flooz-marketing-website-new.mp4.json';
+import dynamic from 'next/dynamic';
+
+// Dynamically import BackgroundVideo with no SSR
+const BackgroundVideo = dynamic(() => import('next-video/background-video'), {
+  ssr: false,
+});
 
 interface CarouselItem {
   id: string | number;
@@ -14,18 +18,14 @@ interface CarouselItem {
 }
 
 interface CarouselConfig {
-  // Animation settings
-  speedMultiplier?: number; // Base animation speed (seconds per item)
-  minSets?: number; // Minimum number of item set repetitions
-  extraSets?: number; // Additional sets beyond minimum required
-
-  // Spacing settings
-  gap?: number; // Space between items in pixels
-  containerPadding?: number; // Padding around the container
-
-  // Visual settings
-  borderRadius?: number; // Border radius of images
+  speedMultiplier?: number;
+  minSets?: number;
+  extraSets?: number;
+  gap?: number;
+  containerPadding?: number;
+  borderRadius?: number;
   objectFit?: 'cover' | 'contain' | 'fill';
+  mobileBreakpoint?: number;
 }
 
 interface InfiniteCarouselProps {
@@ -34,13 +34,14 @@ interface InfiniteCarouselProps {
 }
 
 const defaultConfig: CarouselConfig = {
-  speedMultiplier: 5, // 5 seconds per item
-  minSets: 2, // Minimum 2 sets of items
-  extraSets: 1, // 1 extra set beyond minimum required
-  gap: 24, // 24px gap between items
-  containerPadding: 16, // 16px container padding
-  borderRadius: 8, // 8px border radius
-  objectFit: 'cover', // Default object-fit
+  speedMultiplier: 5,
+  minSets: 2,
+  extraSets: 1,
+  gap: 16,
+  containerPadding: 16,
+  borderRadius: 8,
+  objectFit: 'cover',
+  mobileBreakpoint: 768,
 };
 
 const InfiniteCarousel = ({
@@ -49,43 +50,74 @@ const InfiniteCarousel = ({
 }: InfiniteCarouselProps) => {
   const [containerWidth, setContainerWidth] = useState(0);
   const [totalWidth, setTotalWidth] = useState(0);
-  const containerRef = useRef(null);
-  const contentRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
-  // Merge default config with user config
   const finalConfig = { ...defaultConfig, ...config };
   const {
     minSets = 2,
     extraSets = 1,
-    gap = 24,
-    containerPadding = 16,
-    borderRadius = 8,
-    objectFit = 'cover',
+    gap = 0,
+    containerPadding,
+    borderRadius,
+    objectFit,
+    mobileBreakpoint,
   } = finalConfig;
+
+  // Calculate scaled dimensions based on container width
+  const getScaledDimensions = (item: CarouselItem) => {
+    if (!containerWidth) return { width: item.width, height: item.height };
+
+    if (!isMobile) return { width: item.width, height: item.height };
+
+    // Calculate max dimensions for mobile
+    const maxWidth = containerWidth - gap;
+    const maxHeight = window.innerHeight * 0.5; // 60vh
+
+    // Calculate scale based on both width and height constraints
+    const scaleByWidth = maxWidth / item.width;
+    const scaleByHeight = maxHeight / item.height;
+    const scale = Math.min(scaleByWidth, scaleByHeight);
+
+    // Apply scale to both dimensions to maintain aspect ratio
+    return {
+      width: Math.round(item.width * scale),
+      height: Math.round(item.height * scale),
+    };
+  };
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     if (!containerRef.current || items.length === 0) return;
 
     const calculateTotalWidth = () => {
-      // Calculate total width including gaps
-      return items.reduce((acc, item) => acc + item.width + gap, 0);
+      return items.reduce((acc, item) => {
+        const { width } = getScaledDimensions(item);
+        return acc + width + gap;
+      }, 0);
     };
 
     const updateDimensions = () => {
-      const containerWidth = containerRef.current
-        ? (containerRef.current as HTMLDivElement).offsetWidth
-        : 0;
-      const totalWidth = calculateTotalWidth();
-
+      const containerWidth = containerRef.current?.offsetWidth || 0;
+      setIsMobile(window.innerWidth < (mobileBreakpoint || 768));
       setContainerWidth(containerWidth);
-      setTotalWidth(totalWidth);
+
+      // Delay total width calculation to next frame to ensure scaled dimensions are calculated
+      requestAnimationFrame(() => {
+        setTotalWidth(calculateTotalWidth());
+      });
     };
 
     updateDimensions();
     window.addEventListener('resize', updateDimensions);
 
     return () => window.removeEventListener('resize', updateDimensions);
-  }, [items, gap]);
+  }, [items, gap, mobileBreakpoint]);
 
   const getItemSets = () => {
     if (!totalWidth || !containerWidth || totalWidth === 0) return items;
@@ -98,6 +130,41 @@ const InfiniteCarousel = ({
   };
 
   const itemSets = getItemSets();
+
+  // Render placeholder during SSR for video items
+  const renderItem = (item: CarouselItem) => {
+    const dimensions = getScaledDimensions(item);
+    const style = {
+      ...dimensions,
+      borderRadius,
+      objectFit,
+    };
+
+    if (item.type === 'video') {
+      if (!isClient) {
+        return (
+          <div
+            className='border overflow-hidden rounded-lg bg-gray-100'
+            style={style}
+          />
+        );
+      }
+      return (
+        <div className='border overflow-hidden rounded-lg' style={style}>
+          <BackgroundVideo src={item.src as string} />
+        </div>
+      );
+    }
+
+    return (
+      <img
+        src={item.src as string}
+        alt={item.alt}
+        style={style}
+        className='object-cover border rounded-lg'
+      />
+    );
+  };
 
   return (
     <div
@@ -137,31 +204,7 @@ const InfiniteCarousel = ({
             }}
             className='flex-none'
           >
-            {item.type === 'video' ? (
-              <div
-                className='border overflow-hidden rounded-lg'
-                style={{
-                  width: item.width,
-                  height: item.height,
-                  borderRadius,
-                  objectFit,
-                  overflow: 'hidden',
-                }}
-              >
-                <BackgroundVideo src={item.src as string} />
-              </div>
-            ) : (
-              <img
-                src={item.src as string}
-                alt={item.alt}
-                style={{
-                  width: item.width,
-                  height: item.height,
-                  borderRadius,
-                  objectFit,
-                }}
-              />
-            )}
+            {renderItem(item)}
           </div>
         ))}
       </div>
@@ -219,13 +262,13 @@ const CarouselDemo = () => {
 
   const customConfig: CarouselConfig = {
     speedMultiplier: 3, // Faster animation
-    gap: 32, // Larger gaps
+    gap: 16, // Larger gaps
     borderRadius: 12, // Rounder corners
     objectFit: 'contain', // Different image fitting
   };
 
   return (
-    <div className='w-full mx-auto my-20'>
+    <div className='w-full mx-auto my-4 md:my-16'>
       <InfiniteCarousel items={sampleItems} config={customConfig} />
     </div>
   );
