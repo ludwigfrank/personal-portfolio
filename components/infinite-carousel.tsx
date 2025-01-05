@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import videoFlooz from '@/videos/flooz-marketing-website-new.mp4.json';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 
 // Dynamically import BackgroundVideo with no SSR
 const BackgroundVideo = dynamic(() => import('next-video/background-video'), {
@@ -157,8 +158,10 @@ const InfiniteCarousel = ({
     }
 
     return (
-      <img
+      <Image
         src={item.src as string}
+        width={dimensions.width}
+        height={dimensions.height}
         alt={item.alt}
         style={style}
         className='object-cover border rounded-lg'
