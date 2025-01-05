@@ -29,7 +29,7 @@ export default function Home() {
         </section>
 
         <section className='w-full px-5 mt-16 lg:mt-40'>
-          <div className='max-w-[960] m-auto mb-8 flex flex-col relative'>
+          <div className='max-w-[960px] m-auto mb-8 flex flex-col relative'>
             <div className='mb-6'>
               <Image
                 src='/img/avatar.png'
