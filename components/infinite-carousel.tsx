@@ -52,7 +52,6 @@ const InfiniteCarousel = ({
   // Merge default config with user config
   const finalConfig = { ...defaultConfig, ...config };
   const {
-    speedMultiplier = 5,
     minSets = 2,
     extraSets = 1,
     gap = 24,
