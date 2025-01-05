@@ -79,7 +79,7 @@ export default function Home() {
         </section>
 
         <section className='w-full px-5'>
-          <div className='max-w-[960] m-auto relative flex lg:items-center justify-between gap-4 flex-col lg:flex-row'>
+          <div className='max-w-[960px] m-auto relative flex lg:items-center justify-between gap-4 flex-col lg:flex-row'>
             <div className='grid md:flex md:flex-row gap-3'>
               <a
                 href='#'
